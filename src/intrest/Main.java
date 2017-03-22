@@ -3,7 +3,8 @@ package intrest;
 import java.util.Date;
 
 public class Main {
-    private static DateCalculator calc = new DateCalculator(DateCalculator.GMT);
+    private static final DateCalculator calc
+            = new DateCalculator(DateCalculator.GMT);
 
     public static void main(String[] args) {
         double amount = Double.parseDouble(args[0]);
