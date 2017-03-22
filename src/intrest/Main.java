@@ -22,7 +22,7 @@ public class Main {
         }
         trate *= Math.pow(1+rate,
                 (double)DateCalculator.daysBetween(startDate, date)
-                        /(double)calc.yearOf(startDate));
+                /(double)DateCalculator.daysInYear(calc.yearOf(startDate)));
         System.out.println("Rate: " + trate);
         System.out.println("Amount: " + Math.round(20*amount*trate)/20.);
     }
