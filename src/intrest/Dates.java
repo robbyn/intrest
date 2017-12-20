@@ -6,7 +6,7 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DateCalculator {
+public class Dates {
     public static final TimeZone GMT = TimeZone.getTimeZone("GMT");
     public static final long MILLIS_PER_DAY = 24L*60L*60L*1000L;
 
@@ -15,7 +15,7 @@ public class DateCalculator {
 
     private final TimeZone tz;
 
-    public DateCalculator(TimeZone tz) {
+    public Dates(TimeZone tz) {
         this.tz = tz;
     }
 

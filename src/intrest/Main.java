@@ -3,27 +3,33 @@ package intrest;
 import java.util.Date;
 
 public class Main {
-    private static final DateCalculator calc
-            = new DateCalculator(DateCalculator.GMT);
+    private static final Dates calc
+            = new Dates(Dates.GMT);
 
     public static void main(String[] args) {
         double amount = Double.parseDouble(args[0]);
         double rate = Double.parseDouble(args[1]);
         Date startDate = calc.parseDate(args[2]);
-        Date date = calc.parseDate(args[3]);
+        Date endDate = calc.parseDate(args[3]);
+        double trate = totalRate(startDate, endDate, rate);
+        System.out.println("Rate: " + trate);
+        System.out.println("Amount: " + Math.round(20*amount*trate)/20.);
+    }
+
+    public static double totalRate(Date startDate, Date endDate,
+            double annualRate) {
         double trate = 1.0;
         while (true) {
             Date next = calc.addYears(startDate, 1);
-            if (next.after(date)) {
+            if (next.after(endDate)) {
                 break;
             }
-            trate *= (1+rate);
+            trate *= (1+annualRate);
             startDate = next;
         }
-        trate *= Math.pow(1+rate,
-                (double)DateCalculator.daysBetween(startDate, date)
-                /(double)DateCalculator.daysInYear(calc.yearOf(startDate)));
-        System.out.println("Rate: " + trate);
-        System.out.println("Amount: " + Math.round(20*amount*trate)/20.);
+        trate *= Math.pow(1+annualRate,
+                (double)Dates.daysBetween(startDate, endDate)
+                        /(double)Dates.daysInYear(calc.yearOf(startDate)));
+        return trate;
     }
 }
